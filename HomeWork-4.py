@@ -1,31 +1,43 @@
 # Triangle №1
 n = int(input('Enter width triangle:'))
 i = '*'
-while n >= len(i):
-    print(n * '*')
-    n -= 1
+if n > len(i):
+    while n >= len(i):
+        print(n * '*')
+        n -= 1
+else:
+    print('Incorrect value')
 
 # Triangle №2
 n = int(input('Enter width triangle:'))
 z = '*'
-while z <= n * '*':
-    print(z)
-    z += '*'
+if z < n * '*':
+    while z <= n * '*':
+        print(z)
+        z += '*'
+else:
+    print('Incorrect value')
 
 # Triangle №3
 n = int(input('Enter width triangle:'))
 i = '*'
 s = ""
-while n >= len(i):
-    print(s + (n * '*'))
-    n -= 1
-    s += ' '
+if n > len(i):
+    while n >= len(i):
+        print(s + (n * '*'))
+        n -= 1
+        s += ' '
+else:
+    print('Incorrect value')
 
 # Triangle №4
 n = int(input('Enter width triangle:'))
 i = '*'
 b = n
-while n >= len(i):
-    b -= 1
-    print(b * ' ' + i)
-    i += '*'
+if n > len(i):
+    while n >= len(i):
+        b -= 1
+        print(b * ' ' + i)
+        i += '*'
+else:
+    print('Incorrect value')
