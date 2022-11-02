@@ -1,44 +1,42 @@
 # Задание 1:
 # Пользователь вводит слово, если это слово является полиндромом, то вывести '+', иначе '-'
-# a = str(input('Your Word: '))
-# if a == a[::-1]:
-#     print('+')
-# else:
-#     print('-')
+a = str(input('Your Word: '))
+if a == a[::-1]:
+    print('+')
+else:
+    print('-')
 
 # Задание 2:
 # Пользователь вводит текст и слово которое нужно найти, если это слово есть в тексте, вывести 'YES', иначе 'NO'
-# a, b = str(input('Your Text: ')), str(input('Your Word: '))
-# if b in a:
-#      print('YES')
-# else:
-#      print('NO')
+a, b = str(input('Your Text: ')), str(input('Your Word: '))
+if b in a:
+    print('YES')
+else:
+    print('NO')
 
 # Задание 3:
 # Пользователь вводит строку. Если она начинается на 'abc', то заменить их на 'www', иначе добавить в конец строки 'zzz'.
-# a = str(input('Your Word: '))
-# if a[0:3:1] == 'abc':
-#     a = a.replace(a[0:3:1], 'www', 1)
-# else:
-#     a = a + 'zzz'
-# print(a)
+a = str(input('Your Word: '))
+if a[0:3:1] == 'abc':
+    a = a.replace(a[0:3:1], 'www', 1)
+else:
+    a = a + 'zzz'
+print(a)
 
 # Задание 4:
 # Пользователь вводит текст, удалить в тексте все цифры и вывести строку пользователю.
-# a, b = str(input('Your Word: ')), ''
-# for i in a:
-#     if i.isalpha():
-#         b = b + i
-# else:
-#     pass
-# a = b
-# print(a)
-
+a, b = str(input('Your Word: ')), ''
+for i in a:
+    if i.isalpha() or i.isspace():
+        b += i
+    else:
+        pass
+print('Result: ' + b)
 
 # Задание 5:
-# Написать валидатор для почты. Пользователь вводит почту, а программа должна проверить, что в почте есть символ '@' и '.', и если это так, то вывести "YES", иначе "NO"
-# a = str(input('Your Mail: '))
-# if '@' in a and "." in a:
-#     print('YES')
-# else:
-#     print('NO')
+#Написать валидатор для почты. Пользователь вводит почту, а программа должна проверить, что в почте есть символ '@' и '.', и если это так, то вывести "YES", иначе "NO"
+a = str(input('Your Mail: '))
+if '@' in a and "." in a:
+    print('YES')
+else:
+    print('NO')
