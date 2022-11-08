@@ -35,7 +35,7 @@
 # Вывести список в обратной последовательности
 # a = []
 # N = int(input('Enter N number: '))
-# for _ in range(1*N):
+# for _ in range(1 * N):
 #     b = int(input('Enter number: '))
 #     a.append(b)
 # a.reverse()
@@ -63,7 +63,7 @@
 
 # a = []
 # N = int(input('Enter N number: '))
-# for _ in range(1*N):
+# for _ in range(1 * N):
 #     b = int(input('Enter WHOLE number: '))
 #     a.append(b)
 
@@ -82,6 +82,7 @@
 # Пример:
 # > 'Lorem 222 ipsum, 123 dolor 1 sit amet
 # Количество чисел: 3
+
 # N = str(input('Enter your text: '))
 # b = N.split(' ')
 # w = []
