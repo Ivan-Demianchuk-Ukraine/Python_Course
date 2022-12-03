@@ -15,8 +15,7 @@ def get_random_string(length: int) -> str:
         elif letters_or_digits == 3:
             i = random.randint(97, 122)
             c = c + chr(i)
-    print(c)
     return c
 
 
-get_random_string(23)
+print(get_random_string(23))
