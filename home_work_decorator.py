@@ -1,31 +1,59 @@
 global_dict = {}
 
+
 def call_times(filename):
     def decorator(func):
-      def wrapper():
-        if func.__name__ in global_dict.keys():
-          global_dict.update({func.__name__: global_dict[func.__name__] + 1})
-        else:
-          global_dict[func.__name__] = 1
+        def wrapper():
+            if filename in global_dict.keys():
+                res = None
+                for x in global_dict[filename]:
+                    if x["func"] == func.__name__:
+                        x["num"] = x["num"] + 1
+                        res = True
+                        break
 
-        file_str = ""
-        for x, y in global_dict.items():
-          file_str += x + " was called " + str(y) + " times\n"
+                if not res:
+                    global_dict[filename].append({
+                        "num": 1,
+                        "func": func.__name__
+                    })
+            else:
+                global_dict[filename] = [{
+                    "num": 1,
+                    "func": func.__name__
+                }]
 
-        with open(filename, "w") as my_file:
-          my_file.write(file_str)
-        func()
-      return wrapper
+            file_str = ""
+            for x, y in global_dict.items():
+                if x == filename:
+                    for i in y:
+                        file_str += i["func"] + " was called " + str(i["num"]) + " times\n"
+
+            with open(filename, "w") as my_file:
+                my_file.write(file_str)
+            func()
+
+        return wrapper
+
     return decorator
 
-@call_times("test.txt")
+
+@call_times('foo.txt')
 def foo():
-  print("test_foo")
+  pass
 
-@call_times("test.txt")
+@call_times('foo.txt')
 def boo():
-  print("test_boo")
+  pass
 
+@call_times('calls.txt')
+def doo():
+  pass
+
+foo()
+boo()
 foo()
 foo()
 boo()
+doo()
+
