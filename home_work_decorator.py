@@ -40,15 +40,17 @@ def call_times(filename):
 
 @call_times('foo.txt')
 def foo():
-  pass
+    pass
 
 @call_times('foo.txt')
 def boo():
-  pass
+    pass
+
 
 @call_times('calls.txt')
 def doo():
-  pass
+    pass
+
 
 foo()
 boo()
@@ -56,4 +58,3 @@ foo()
 foo()
 boo()
 doo()
-
