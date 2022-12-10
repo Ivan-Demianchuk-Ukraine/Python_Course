@@ -1,24 +1,30 @@
 def custom_zip(*lists, full=False, default=None) -> list:
+    all_lists = []
+    result_list = []
+    for i in lists:
+        all_lists.append(len(i))
+    min_list = min(all_lists)
+    max_list = max(all_lists)
+
     if full == True:
-        max_length = len(lists)
-        print(max_length)
-        min_length = len(lists)
+
+        for i in lists:
+            if max_list > len(i):
+                while max_list > len(i):
+                    i.append(default)
+        print(*lists)
 
     else:
-        result_list = []
-        shortest_list_is = []
-        for i in lists:
-            shortest_list_is.append(len(i))
-        shortest_list_is = min(shortest_list_is)
+
 
         count = 0
         timely_list = []
-        for _ in range(shortest_list_is):
+        for _ in range(min_list):
             for i, value in enumerate(lists):
                 timely_list.append(value[count])
             count += 1
 
-        for i in range(shortest_list_is):
+        for i in range(min_list):
             m = 0
             p = []
             for _ in range(len(lists)):
