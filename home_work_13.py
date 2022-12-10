@@ -1,13 +1,10 @@
 def custom_zip(*lists, full=False, default=None) -> list:
-    all_lists = []
-    result_list = []
+    all_lists, result_list = [], []
     for i in lists:
         all_lists.append(len(i))
-    min_list = min(all_lists)
-    max_list = max(all_lists)
+    min_list, max_list = min(all_lists), max(all_lists)
 
     if full == True:
-
         for i in lists:
             if max_list > len(i):
                 while max_list > len(i):
@@ -15,8 +12,6 @@ def custom_zip(*lists, full=False, default=None) -> list:
         print(*lists)
 
     else:
-
-
         count = 0
         timely_list = []
         for _ in range(min_list):
@@ -25,15 +20,13 @@ def custom_zip(*lists, full=False, default=None) -> list:
             count += 1
 
         for i in range(min_list):
-            m = 0
+            index = 0
             p = []
             for _ in range(len(lists)):
-                p.append(timely_list[m])
-                m += 1
+                p.append(timely_list[index])
+                index += 1
                 if len(p) == (len(lists)):
                     result_list.append(tuple(p))
-                    p = []
-                    m = 0
                     for _ in range(len(lists)):
                         timely_list.pop(0)
         return result_list
