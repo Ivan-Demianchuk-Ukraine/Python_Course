@@ -1,19 +1,19 @@
 def custom_map(function, *lists) -> list:
     f, t, n, x, y, h = 0, 1, 2, 0, 0, 0
-    same_length_sheets = list(zip(*lists))
+    items_in_list = len(list(zip(*lists)))
     result_list = []
     if '<lambda>' in str(function) and len(lists) == 3:
-        for _ in range(len(same_length_sheets)):
+        for _ in range(items_in_list):
             value_from_one, value_from_second, value_from_third = lists[f], lists[t], lists[n]
             result_list.append(function(value_from_one[x], value_from_second[y], value_from_third[h]))
             x, y, h = x + 1, y + 1, h + 1
         return result_list
     elif '<lambda>' in str(function) and len(lists) == 2:
-            for _ in range(len(same_length_sheets)):
-                value_from_one, value_from_second = lists[f], lists[t]
-                result_list.append(function(value_from_one[x], value_from_second[y]))
-                x, y = x + 1, y + 1
-            return result_list
+        for _ in range(items_in_list):
+            value_from_one, value_from_second = lists[f], lists[t]
+            result_list.append(function(value_from_one[x], value_from_second[y]))
+            x, y = x + 1, y + 1
+        return result_list
     else:
         for i, value in enumerate(*lists):
             result_list.append(function(value))
