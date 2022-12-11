@@ -54,4 +54,4 @@ def custom_zip(*lists, full=False, default=None) -> list:
         return result_list
 
 
-print(custom_zip([1, 2, 3, 4, 5], [9, 8, 7], [1], full=True, default='Q'))
+print(custom_zip([1, 2, 3, 4, 5], [9, 8, 7], full=True, default='Q'))
