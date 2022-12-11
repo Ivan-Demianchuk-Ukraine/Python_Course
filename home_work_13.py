@@ -47,7 +47,7 @@ def custom_zip(*lists, full=False, default=None) -> list:
             for _ in range(lists_len):
                 two_items_list.append(timely_list[index])
                 index += 1
-                if len(two_items_list) == (lists_len):
+                if len(two_items_list) == lists_len:
                     result_list.append(tuple(two_items_list))
                     for _ in range(lists_len):
                         timely_list.pop(0)
