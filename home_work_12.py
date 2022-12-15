@@ -1,23 +1,27 @@
-def custom_map(function, *lists) -> list:
-    f, t, n, x, y, h = 0, 1, 2, 0, 0, 0
-    items_in_list = len(list(zip(*lists)))
+from typing import Callable, Iterable
+
+
+def custom_map(func: Callable, *iterables) -> Iterable:
     result_list = []
-    if '<lambda>' in str(function) and len(lists) == 3:
-        for _ in range(items_in_list):
-            value_from_one, value_from_second, value_from_third = lists[f], lists[t], lists[n]
-            result_list.append(function(value_from_one[x], value_from_second[y], value_from_third[h]))
-            x, y, h = x + 1, y + 1, h + 1
-        return result_list
-    elif '<lambda>' in str(function) and len(lists) == 2:
-        for _ in range(items_in_list):
-            value_from_one, value_from_second = lists[f], lists[t]
-            result_list.append(function(value_from_one[x], value_from_second[y]))
-            x, y = x + 1, y + 1
-        return result_list
+    values_amount = len(iterables)
+    if hasattr(func, '__builtins__'):
+        length_min_list = []
+        for x in iterables:
+            length_min_list.append(len(x))
+        length_min = min(length_min_list)
+        for j in range(0, length_min):
+            temp_list = []
+            i = 0
+            while i < len(iterables):
+                temp_list.append(iterables[i][j])
+                i = i + 1
+            temp_list = tuple(temp_list)
+            result_list.append(func(*temp_list))
     else:
-        for i, value in enumerate(*lists):
-            result_list.append(function(value))
-        return result_list
+        if values_amount == 1 and len(iterables[0]) > 1:
+            result_list = [func(iterables[0][i]) for i in range(0, len(iterables[0]))]
+
+    return result_list
 
 
 sum2 = lambda x, y: x + y
