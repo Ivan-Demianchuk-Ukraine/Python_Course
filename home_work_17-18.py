@@ -18,14 +18,21 @@
 #
 # Это задание на это и следующие занятие. Пока советую выбрать систему, и порисовать из чего она состоит.
 
-Start = str(input(' Hello investor! What do you want today? \n Check balance of my stock - enter 1'
-                  ' \n Buy new stock - enter 2 \n Sell stock - enter 3\n'))
-
+# Start = str(input('Hello investor! What do you want today?\n Check balance of my stock - enter 1'
+#                   '\n Buy new stock - enter 2\n Sell stock - enter 3\n'))
 
 
 class GoogleStock:
-    def __init__(self, amount_of_stock: int = None):
+    def __init__(self, amount_of_stock: int = 0):
         self.amount_of_stock = amount_of_stock
+
+    def buy_stock(self, amount: int):
+        self.amount_of_stock = self.amount_of_stock + amount
+        return f'You successfully bought {amount} stock. \nYour current amount of GoogleStock = {self.amount_of_stock}'
+
+    def sell_stock(self, amount: int):
+        self.amount_of_stock = self.amount_of_stock - amount
+        return f'You successfully sold {amount} stock. \nYour current amount of GoogleStock = {self.amount_of_stock}'
 
 
 class FacebookStock:
@@ -45,9 +52,11 @@ class Investors(TeslaStock, NetflixStock, FacebookStock, GoogleStock):
     currency = '$'
 
 
-investor = Investors(25)
-print(investor.amount_of_stock)
+investor = Investors()
+print(investor.buy_stock(25))
+print(investor.buy_stock(21))
+print(investor.sell_stock(10))
 
-End = str(input(' Can we end? If you pick YES - all data will lost. If you pick NO - '
-                'you will get possibility to buy more stock. '))
+# End = str(input('Can we end? If you pick YES - all data will lost. If you pick NO - '
+#                 'you will get possibility to buy more stock. '))
 
