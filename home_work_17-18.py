@@ -21,49 +21,111 @@
 # Start = str(input('Hello investor! What do you want today?\n Check balance of my stock - enter 1'
 #                   '\n Buy new stock - enter 2\n Sell stock - enter 3\n'))
 
-Full_Balance = {}
-
-
 class GoogleStock:
     google_price_for_one_stock = 550
 
     def __init__(self, amount_of_google_stock: int = 0):
         self.amount_of_google_stock = amount_of_google_stock
 
-    def buy_stock(self, amount: int):
+    def buy_google_stock(self, amount: int):
         self.amount_of_google_stock = self.amount_of_google_stock + amount
-        return f'You successfully bought {amount} stock. \nYour current amount of GoogleStock = {self.amount_of_google_stock}'
+        return f'You successfully bought {amount} google stock. \nYour current amount of GoogleStock =' \
+               f' {self.amount_of_google_stock}'
 
-    def sell_stock(self, amount: int):
+    def sell_google_stock(self, amount: int):
         self.amount_of_google_stock = self.amount_of_google_stock - amount
-        return f'You successfully sold {amount} stock. \nYour current amount of GoogleStock = {self.amount_of_google_stock}'
+        return f'You successfully sold {amount} google stock. \nYour current amount of GoogleStock = {self.amount_of_google_stock}'
 
-    def get_total_stock_value(self):
-        return self.amount_of_google_stock * GoogleStock.google_price_for_one_stock
+    def get_total_google_stock_value(self):
+        if Investors.currency == 'dollar':
+            return f'You own Google shares worth: {self.amount_of_google_stock * GoogleStock.google_price_for_one_stock} ' \
+                   f'dollars.'
+        elif Investors.currency == 'euro':
+            return f'You own Google shares worth: {self.amount_of_google_stock * GoogleStock.google_price_for_one_stock} ' \
+                   f'euros.'
 
 
 class FacebookStock:
-    pass
+    facebook_price_for_one_stock = 400
+
+    def __init__(self, amount_of_facebook_stock: int = 0):
+        self.amount_of_facebook_stock = amount_of_facebook_stock
+
+    def buy_facebook_stock(self, amount: int):
+        self.amount_of_facebook_stock = self.amount_of_facebook_stock + amount
+        return f'You successfully bought {amount} facebook stock. \nYour current amount of FacebookStock = ' \
+               f'{self.amount_of_facebook_stock}'
+
+    def sell_facebook_stock(self, amount: int):
+        self.amount_of_facebook_stock = self.amount_of_facebook_stock - amount
+        return f'You successfully sold {amount} facebook stock. \nYour current amount of FacebookStock =' \
+               f' {self.amount_of_facebook_stock}'
+
+    def get_total_facebook_stock_value(self):
+        return self.amount_of_facebook_stock * FacebookStock.facebook_price_for_one_stock
 
 
 class NetflixStock:
-    pass
+    netflix_price_for_one_stock = 330
+
+    def __init__(self, amount_of_netflix_stock: int = 0):
+        self.amount_of_netflix_stock = amount_of_netflix_stock
+
+    def buy_netflix_stock(self, amount: int):
+        self.amount_of_netflix_stock = self.amount_of_netflix_stock + amount
+        return f'You successfully bought {amount} netflix stock. \nYour current amount of NetflixStock =' \
+               f' {self.amount_of_netflix_stock}'
+
+    def sell_netflix_stock(self, amount: int):
+        self.amount_of_netflix_stock = self.amount_of_netflix_stock - amount
+        return f'You successfully sold {amount} netflix stock. \nYour current amount of NetflixStock =' \
+               f' {self.amount_of_netflix_stock}'
+
+    def get_total_netflix_stock_value(self):
+        return self.amount_of_netflix_stock * NetflixStock.netflix_price_for_one_stock
 
 
 class TeslaStock:
-    pass
+    tesla_price_for_one_stock = 270
+
+    def __init__(self, amount_of_tesla_stock: int = 0):
+        self.amount_of_tesla_stock = amount_of_tesla_stock
+
+    def buy_tesla_stock(self, amount: int):
+        self.amount_of_tesla_stock = self.amount_of_tesla_stock + amount
+        return f'You successfully bought {amount} tesla stock. \nYour current amount of TeslaStock =' \
+               f' {self.amount_of_tesla_stock}'
+
+    def sell_tesla_stock(self, amount: int):
+        self.amount_of_tesla_stock = self.amount_of_tesla_stock - amount
+        return f'You successfully sold {amount} tesla stock. \nYour current amount of GoogleStock =' \
+               f' {self.amount_of_tesla_stock}'
+
+    def get_total_tesla_stock_value(self):
+        if Investors.currency == 'dollar':
+            return f'You own Tesla shares worth: {self.amount_of_tesla_stock * TeslaStock.tesla_price_for_one_stock} ' \
+                   f'dollars.'
+        elif Investors.currency == 'euro':
+            return f'You own Tesla shares worth: {self.amount_of_tesla_stock * TeslaStock.tesla_price_for_one_stock} ' \
+                   f'euros.'
 
 
 class Investors(TeslaStock, NetflixStock, FacebookStock, GoogleStock):
     country = 'USA'
     currency = 'dollar'
 
+    def __init__(self, amount_of_tesla_stock, amount_of_netflix_stock, amount_of_facebook_stock, amount_of_google_stock):
+        TeslaStock.__init__(self, amount_of_tesla_stock)
+        NetflixStock.__init__(self, amount_of_netflix_stock)
+        FacebookStock.__init__(self, amount_of_facebook_stock)
+        GoogleStock.__init__(self, amount_of_google_stock)
+
     @staticmethod
     def get_full_balance():
         return f'You have: {investor.amount_of_google_stock} Google stock.\n' \
-               f'You have: . . . Tesla stock.\n' \
-               f'You have: . . . Facebook stock.\n' \
-               f'You have: . . . Netflix stock.'
+               f'You have: {investor.amount_of_tesla_stock} Tesla stock.\n' \
+               f'You have: {investor.amount_of_facebook_stock} Facebook stock.\n' \
+               f'You have: {investor.amount_of_netflix_stock} Netflix stock.'
 
     @classmethod
     def change_currency(cls, new_currency):
@@ -81,17 +143,18 @@ class Investors(TeslaStock, NetflixStock, FacebookStock, GoogleStock):
             return f'your {old_value} euro for 1 stock was changed on {GoogleStock.google_price_for_one_stock}' \
                    f' dollar for 1 stock'
 
-
-investor = Investors()
-print(investor.buy_stock(25))
-print(investor.buy_stock(21))
-print(investor.sell_stock(10))
-print(investor.get_full_balance())
-print(investor.get_total_stock_value())
-print(investor.change_currency('euro'))
-print(investor.google_price_for_one_stock)
-print(investor.get_total_stock_value())
+#will be error because you need to change sequence of classes in the 103 line)
+investor = Investors(0, 0, 0, 0)
+print(investor.buy_google_stock(100))
+print(investor.buy_tesla_stock(50))
+print(investor.buy_facebook_stock(25))
+print(investor.buy_netflix_stock(10))
+print()
 print(investor.change_currency('dollar'))
-# End = str(input('Can we end? If you pick YES - all data will lost. If you pick NO - '
-#                 'you will get possibility to buy more stock. '))
+print(investor.get_total_google_stock_value())
+print(investor.get_total_netflix_stock_value())
+print(investor.get_total_facebook_stock_value())
+print(investor.get_total_tesla_stock_value())
 
+# # End = str(input('Can we end? If you pick YES - all data will lost. If you pick NO - '
+# #                 'you will get possibility to buy more stock. '))
