@@ -17,9 +17,72 @@
 # Ограничений на количество классов нет, но конечно их тут будет не пара.
 #
 # Это задание на это и следующие занятие. Пока советую выбрать систему, и порисовать из чего она состоит.
+import time
+# print('H', end='')
+# time.sleep(0.3)
+# print('e', end='')
+# time.sleep(0.3)
+# print('l', end='')
+# time.sleep(0.3)
+# print('l', end='')
+# time.sleep(0.3)
+# print('o', end=' ')
+# time.sleep(0.3)
+#
+# print('i', end='')
+# time.sleep(0.3)
+# print('n', end='')
+# time.sleep(0.3)
+# print('v', end='')
+# time.sleep(0.3)
+# print('e', end='')
+# time.sleep(0.3)
+# print('s', end='')
+# time.sleep(0.3)
+# print('t', end='')
+# time.sleep(0.3)
+# print('o', end='')
+# time.sleep(0.3)
+# print('r', end='')
+# time.sleep(0.3)
+# print('!')
+# time.sleep(1)
+#
+#
+#
+# print('l', end='')
+# time.sleep(0.3)
+# print('e', end='')
+# time.sleep(0.3)
+# print('t', end='')
+# time.sleep(0.3)
+# print("'", end='')
+# time.sleep(0.3)
+# print('s', end=' ')
+# time.sleep(0.3)
+#
+# print('g', end='')
+# time.sleep(0.3)
+# print("o", end='')
+# time.sleep(0.3)
+# print('?')
+# time.sleep(0.5)
+# print('.', end='')
+# time.sleep(0.3)
+# print('.', end='')
+# time.sleep(0.3)
+# print('.')
+# time.sleep(0.3)
+# print('.', end='')
+# time.sleep(0.3)
+# print('.', end='')
+# time.sleep(0.3)
+# print('.')
+# time.sleep(2)
+
 start = str
 
-while start != '4':
+while start != '5':
 
     class GoogleStock:
         google_price_for_one_stock = 550
@@ -38,10 +101,10 @@ while start != '4':
 
         def get_total_google_stock_value(self):
             if Investors.currency == 'dollar':
-                return f'You own Google shares worth: {self.amount_of_google_stock * GoogleStock.google_price_for_one_stock} ' \
+                return f'All your Google shares are valued at: {self.amount_of_google_stock * GoogleStock.google_price_for_one_stock} ' \
                        f'dollars.'
             elif Investors.currency == 'euro':
-                return f'You own Google shares worth: {self.amount_of_google_stock * GoogleStock.google_price_for_one_stock} ' \
+                return f'All your Google shares are valued at: {self.amount_of_google_stock * GoogleStock.google_price_for_one_stock} ' \
                        f'euros.'
 
 
@@ -146,14 +209,72 @@ while start != '4':
     #will be error because you need to change sequence of classes in the 103 line)
     investor = Investors(0, 0, 0, 0)
 
-    start = str(input('What do you want today?\nTo check your balance of all stock - enter 1'
-                    '\nTo buy new stock - enter 2\nTo sell stock - enter 3\n'
-                    'End program. - enter 4'))
+    start = str(input('What do you want?\nI want to check my actives - enter 1'
+                    '\nI want to buy new stock - enter 2\nI want to sell stock - enter 3\n'
+                    'Change currency - enter 4\n'
+                    'End program - enter 5'))
     if start == '1':
-        print(investor.get_full_balance())
+        # print('.', end='')
+        # time.sleep(0.3)
+        # print('.', end='')
+        # time.sleep(0.3)
+        # print('.')
+        # time.sleep(0.3)
+        # print('.', end='')
+        # time.sleep(0.3)
+        # print('.', end='')
+        # time.sleep(0.3)
+        # print('.')
+        # time.sleep(0.5)
+        check_what = str
+        while check_what != '6':
+            check_what = str(input('What do you need to check?\n'
+                                    'My Google stocks - press 1\n'
+                                    'My Netflix stocks - press 2\n'
+                                    'My Facebook stocks - press 3\n'
+                                    'My Tesla stocks - press 4\n'
+                                    'I want to check all my stocks in all companies - press 5\n'
+                                    'Quit - press 6'))
+
+            if check_what == '1':
+                print(f'Actual price for one google stock now - '
+                      f'{GoogleStock.google_price_for_one_stock} {Investors.currency}')
+                print(GoogleStock.get_total_google_stock_value(investor))
+                print('You have -', investor.amount_of_google_stock, 'stocks.')
+
+            elif check_what == '2':
+                pass
+
+            elif check_what == '3':
+                pass
+
+            elif check_what == '4':
+                pass
+
+            elif check_what == '5':
+                print(investor.get_full_balance())
+
+            else:
+                print('-' * 10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.',
+                      '-' * 10)
 
     elif start == '2':
-        pass
+        buy_what = str
+        while buy_what != '6':
+            buy_what = str(input('What do you want to buy?\n'
+                                    'Google stocks - press 1\n'
+                                    'Netflix stocks - press 2\n'
+                                    'Facebook stocks - press 3\n'
+                                    'Tesla stocks - press 4\n'
+                                    'I want to buy stocks in all companies at once - press 5\n'
+                                    'Quit - press 6'))
+
+            if buy_what == '1':
+                how_much = int(input('How much stock do you want ?'))
+                investor.buy_google_stock(how_much)
+                print('Thank you! Your purchase was successfully.')
+                print('Now you have:', investor.amount_of_google_stock, 'google stocks.')
+                print(investor.get_total_google_stock_value())
 
     elif start == '3':
         pass
@@ -161,8 +282,11 @@ while start != '4':
     elif start == '4':
         pass
 
+    elif start == '5':
+        pass
+
     else:
-        print('-'*10, 'Ops. Seems that you entered incorrect value. Please, choose digit between 1,2,3 and 4.', '-'*10)
+        print('-'*10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.', '-'*10)
 
     # # End = str(input('Can we end? If you pick YES - all data will lost. If you pick NO - '
 # #                 'you will get possibility to buy more stock. '))
