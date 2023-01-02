@@ -1,0 +1,2 @@
+foo was called 3 times
+boo was called 2 times

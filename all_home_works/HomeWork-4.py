@@ -39,5 +39,3 @@ if n > len(i):
         b -= 1
         print(b * ' ' + i)
         i += '*'
-else:
-    print('Incorrect value')

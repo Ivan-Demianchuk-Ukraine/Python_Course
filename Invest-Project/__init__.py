@@ -28,10 +28,10 @@ def project():
             return f'You successfully sold {amount} google stocks. \nYour current amount of GoogleStocks = {self.amount_of_google_stocks}'
 
         def get_total_stocks(self):
-            if Investors.currency == 'dollar':
+            if investor.currency == 'dollar':
                 return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.google_price_for_one_stock} ' \
                        f'dollars.'
-            elif Investors.currency == 'euro':
+            elif investor.currency == 'euro':
                 return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.google_price_for_one_stock} ' \
                        f'euros.'
 
@@ -52,10 +52,10 @@ def project():
                    f' {self.amount_of_facebook_stocks}'
 
         def get_total_stocks(self):
-            if Investors.currency == 'dollar':
+            if investor.currency == 'dollar':
                 return f'All your Facebook stocks are valued at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
                        f'dollars.'
-            elif Investors.currency == 'euro':
+            elif investor.currency == 'euro':
                 return f'All your Facebook stocks are valued at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
                        f'euros.'
 
@@ -76,10 +76,10 @@ def project():
                    f' {self.amount_of_netflix_stocks}'
 
         def get_total_stocks(self):
-            if Investors.currency == 'dollar':
+            if investor.currency == 'dollar':
                 return f'All your Netflix stocks are valued at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
                        f'dollars.'
-            elif Investors.currency == 'euro':
+            elif investor.currency == 'euro':
                 return f'All your Netlifx stocks are valued at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
                        f'euros.'
 
@@ -100,10 +100,10 @@ def project():
                    f' {self.amount_of_tesla_stocks}'
 
         def get_total_stocks(self):
-            if Investors.currency == 'dollar':
+            if investor.currency == 'dollar':
                 return f'You own Tesla stocks worth: {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} ' \
                        f'dollars.'
-            elif Investors.currency == 'euro':
+            elif investor.currency == 'euro':
                 return f'You own Tesla stocks worth: {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} ' \
                        f'euros.'
 
@@ -119,11 +119,22 @@ def project():
             FacebookStocks.__init__(self, amount_of_facebook_stocks)
             GoogleStocks.__init__(self, amount_of_google_stocks)
             self.__nickname = nickname
-            account_balance = property(fget=balance, fset=balance, doc='')  # DO
+            self.__balance = balance
+
+
+        def get_balance(self):
+            return self.__balance
+
+        def set_balance(self, new_balance):
+            self.__balance = new_balance
+
+        account_balance = property(fget=get_balance, fset=set_balance, doc="Methods to make get/set operations"
+                                                                           " with investor's balance")
 
         @property
         def nickname(self):
-            """doc string"""
+            """this is method with property to make operations with user's nickname.
+            This method returns only nickname value."""
             return self.__nickname
 
         @nickname.setter
@@ -154,14 +165,15 @@ def project():
                        f' dollar for 1 stock'
     nickname = str(input('Please, enter your nickname: '))
     investor = Investors(nickname, 0, 0, 0, 0, 500)
-  # DO add some realization for these printed moments
 
-    while start != '6':
+    while start != '8':
         start = str(input(f'What do you want {investor.nickname}?\nI want to check my actives - enter 1'
                           '\nI want to buy new stock - enter 2\nI want to sell stock - enter 3\n'
                           'Change currency - enter 4\n'
                           'Change my nickname - enter - 5\n'
-                          'End program - enter 6'))
+                          'Check my account balance - enter 6\n'
+                          'Add money to my balance - enter 7\n'
+                          'End program - enter 8'))
         if start == '1':
             # print('.', end='')
             # time.sleep(0.3)
@@ -187,19 +199,25 @@ def project():
 
                 if check_what == '1':
                     print(f'Price for 1 google stock now - '
-                          f'{GoogleStocks.google_price_for_one_stock} {Investors.currency}')
+                          f'{GoogleStocks.google_price_for_one_stock} {investor.currency}')
                     print(GoogleStocks.get_total_stocks(investor))
                     print('You have -', investor.amount_of_google_stocks, 'stocks.')
 
                 elif check_what == '2':
-                    pass
-
+                    print(f'Price for 1 netflix stock now - '
+                          f'{NetflixStocks.netflix_price_for_one_stock} {investor.currency}')
+                    print(NetflixStocks.get_total_stocks(investor))
+                    print('You have -', investor.amount_of_netflix_stocks, 'stocks.')
                 elif check_what == '3':
-                    pass
-
+                    print(f'Price for 1 facebook stock now - '
+                          f'{FacebookStocks.facebook_price_for_one_stock} {investor.currency}')
+                    print(FacebookStocks.get_total_stocks(investor))
+                    print('You have -', investor.amount_of_facebook_stocks, 'stocks.')
                 elif check_what == '4':
-                    pass
-
+                    print(f'Price for 1 tesla stock now - '
+                          f'{TeslaStocks.tesla_price_for_one_stock} {investor.currency}')
+                    print(TeslaStocks.get_total_stocks(investor))
+                    print('You have -', investor.amount_of_tesla_stocks, 'stocks.')
                 elif check_what == '5':
                     print(investor.get_full_balance())
 
@@ -246,7 +264,7 @@ def project():
                     print(TeslaStocks.get_total_stocks(investor))
         elif start == '3':
             sell_what = str
-            while sell_what != '6':
+            while sell_what != '5':
                 sell_what = str(input('What do you want to sell?\n'
                                       'Google stocks - press 1\n'
                                       'Netflix stocks - press 2\n'
@@ -309,12 +327,11 @@ def project():
             new_nickname = str(input('What new nickname do you want? Please, enter: '))
             investor.nickname = new_nickname
             print(f'Congratulations! Your {old_nickname} nickname was changed on {new_nickname} nickname.')
-
+        elif start == '6':
+            print(investor.account_balance, ' ', investor.currency, 's', sep='')
+        elif start == '7':
+            how_many = int(input(f'How much {investor.currency}s do you want to add?'))
+            investor.account_balance += how_many
+            print(investor.account_balance, ' ', investor.currency, 's', sep='')
         else:
             print('-' * 10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.', '-' * 10)
-
-        # # End = str(input('Can we end? If you pick YES - all data will lost. If you pick NO - '
-    # #                 'you will get possibility to buy more stock. '))
-
-    # Polymorphism? I think that I have them.But you need to check it #do add polymorphism everywhere
-

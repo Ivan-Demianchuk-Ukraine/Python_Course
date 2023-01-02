@@ -51,3 +51,16 @@
 #
 #
 # read_file(5, 'test.txt')
+
+from decimal import *
+
+a = 1
+# b = memoryview(bytes(a))
+# print(b)
+#
+# a = 2
+# d = memoryview(bytes(a))
+# print(d)
+
+a = complex(a)
+print(a, end='')

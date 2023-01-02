@@ -1,22 +1,9 @@
-# Выбрать систему, которая может быть описана несколькими классами.
-# Описать исползуя классы и применить принципы ООП:
-# - Наследование
-#
+# - Сокрытие - Easy
+# - Инкапсуляция - Easy
+# У классов должно быть состояние (поля) и реализация поведения через методы. - maybe done.
+
 # - Абстрактные классы и/или интерфейсы
-#
-# - Сокрытие
-#
-# - Инкапсуляция
-#
-# У классов должно быть состояние (поля) и реализация поведения через методы.
-#
-# Требований к типам полей (экземпляра/класса) и методов (экземпляра/класса/статические) нет, по необходимости как вы видите.
-#
-# Написать код который создает необходимые экземпляры и демонстрирует работу систему.
-#
-# Ограничений на количество классов нет, но конечно их тут будет не пара.
-#
-# Это задание на это и следующие занятие. Пока советую выбрать систему, и порисовать из чего она состоит.
+
 import time
 # print('H', end='')
 # time.sleep(0.3)
@@ -83,14 +70,13 @@ import time
 start = str
 
 
-
 class GoogleStock:
     google_price_for_one_stock = 550
 
     def __init__(self, amount_of_google_stock: int = 0):
         self.amount_of_google_stock = amount_of_google_stock
 
-    def buy_google_stock(self, amount: int):
+    def buy_stocks(self, amount: int):
         self.amount_of_google_stock = self.amount_of_google_stock + amount
         return f'You successfully bought {amount} google stock. \nYour current amount of GoogleStock =' \
                f' {self.amount_of_google_stock}'
@@ -154,7 +140,7 @@ class TeslaStock:
     def __init__(self, amount_of_tesla_stock: int = 0):
         self.amount_of_tesla_stock = amount_of_tesla_stock
 
-    def buy_tesla_stock(self, amount: int):
+    def buy_stocks(self, amount: int):
         self.amount_of_tesla_stock = self.amount_of_tesla_stock + amount
         return f'You successfully bought {amount} tesla stock. \nYour current amount of TeslaStock =' \
                f' {self.amount_of_tesla_stock}'
@@ -174,7 +160,7 @@ class TeslaStock:
 
 
 class Investors(TeslaStock, NetflixStock, FacebookStock, GoogleStock):
-    country = 'USA'
+    _country = 'USA'
     currency = 'dollar'
 
     def __init__(self, amount_of_tesla_stock, amount_of_netflix_stock, amount_of_facebook_stock, amount_of_google_stock):
@@ -206,7 +192,7 @@ class Investors(TeslaStock, NetflixStock, FacebookStock, GoogleStock):
             return f'your {old_value} euro for 1 stock was changed on {GoogleStock.google_price_for_one_stock}' \
                    f' dollar for 1 stock'
 
-#will be error because you need to change sequence of classes in the 103 line)
+
 investor = Investors(0, 0, 0, 0)
 
 
@@ -276,11 +262,10 @@ while start != '5':
 
             if buy_what == '1':
                 how_much = int(input('How much stock do you want ?'))
-                investor.buy_google_stock(how_much)
+                GoogleStock.buy_stocks(investor, how_much)
                 print('Thank you! Your purchase was successfully.')
                 print('Now you have:', investor.amount_of_google_stock, 'google stocks.')
                 print(investor.get_total_google_stock_value())
-
     elif start == '3':
         pass
 
@@ -295,3 +280,6 @@ while start != '5':
 
     # # End = str(input('Can we end? If you pick YES - all data will lost. If you pick NO - '
 # #                 'you will get possibility to buy more stock. '))
+
+
+# print(investor._country) - hiding
