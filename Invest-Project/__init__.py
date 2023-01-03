@@ -1,6 +1,5 @@
-# - Абстрактные классы и/или интерфейсы
 import time
-from start_decorator import start_decorator
+from start_decorator import start_decorator, download
 
 
 @start_decorator
@@ -103,8 +102,6 @@ def project():
 
     class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks):
         currency = 'dollar'
-        _country = 'USA'
-        used_bank = 'Bank of America'
 
         def __init__(self, nickname, amount_of_tesla_stocks, amount_of_netflix_stocks, amount_of_facebook_stocks,
                      amount_of_google_stocks, balance):
@@ -168,18 +165,7 @@ def project():
                           'Add money to my balance - enter 7\n'
                           'End program - enter 8\n'))
         if start == '1':
-            # print('.', end='')
-            # time.sleep(0.3)
-            # print('.', end='')
-            # time.sleep(0.3)
-            # print('.')
-            # time.sleep(0.3)
-            # print('.', end='')
-            # time.sleep(0.3)
-            # print('.', end='')
-            # time.sleep(0.3)
-            # print('.')
-            # time.sleep(0.5)
+            download()
             check_what = str
             while check_what != '6':
                 check_what = str(input('What do you need to check?\n'
@@ -191,37 +177,44 @@ def project():
                                        'Quit - press 6\n'))
 
                 if check_what == '1':
+                    download()
                     print(f'Price for 1 google stock now - '
                           f'{GoogleStocks.price_for_one_stock} {investor.currency}')
                     print(GoogleStocks.get_total_stocks(investor))
                     print('You have -', investor.amount_of_google_stocks, 'stocks.')
 
                 elif check_what == '2':
+                    download()
                     print(f'Price for 1 netflix stock now - '
                           f'{NetflixStocks.netflix_price_for_one_stock} {investor.currency}')
                     print(NetflixStocks.get_total_stocks(investor))
                     print('You have -', investor.amount_of_netflix_stocks, 'stocks.')
                 elif check_what == '3':
+                    download()
                     print(f'Price for 1 facebook stock now - '
                           f'{FacebookStocks.facebook_price_for_one_stock} {investor.currency}')
                     print(FacebookStocks.get_total_stocks(investor))
                     print('You have -', investor.amount_of_facebook_stocks, 'stocks.')
                 elif check_what == '4':
+                    download()
                     print(f'Price for 1 tesla stock now - '
                           f'{TeslaStocks.tesla_price_for_one_stock} {investor.currency}')
                     print(TeslaStocks.get_total_stocks(investor))
                     print('You have -', investor.amount_of_tesla_stocks, 'stocks.')
                 elif check_what == '5':
+                    download()
                     print(investor.get_full_balance())
 
                 elif check_what == '6':
-                    print('...')
+                    download()
 
                 else:
+                    download()
                     print('-' * 10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.',
                           '-' * 10)
 
         elif start == '2':
+            download()
             buy_what = str
             while buy_what != '5':
                 buy_what = str(input('What do you want to buy?\n'
@@ -232,30 +225,39 @@ def project():
                                      'Quit - press 5\n'))
 
                 if buy_what == '1':
+                    download()
                     how_much = int(input('How much stocks do you want ?'))
+                    download()
                     GoogleStocks.buy_stocks(investor, how_much)
                     print('Thank you! Your purchase was successfully.')
                     print('Now you have:', investor.amount_of_google_stocks, 'google stocks.')
                     print(GoogleStocks.get_total_stocks(investor))
                 elif buy_what == '2':
+                    download()
                     how_much = int(input('How much stocks do you want ?'))
+                    download()
                     NetflixStocks.buy_stocks(investor, how_much)
                     print('Thank you! Your purchase was successfully.')
                     print('Now you have:', investor.amount_of_netflix_stocks, 'netflix stocks.')
                     print(NetflixStocks.get_total_stocks(investor))
                 if buy_what == '3':
+                    download()
                     how_much = int(input('How much stock do you want ?'))
+                    download()
                     FacebookStocks.buy_stocks(investor, how_much)
                     print('Thank you! Your purchase was successfully.')
                     print('Now you have:', investor.amount_of_facebook_stocks, 'facebook stocks.')
                     print(FacebookStocks.get_total_stocks(investor))
                 if buy_what == '4':
+                    download()
                     how_much = int(input('How much stocks do you want ?'))
+                    download()
                     TeslaStocks.buy_stocks(investor, how_much)
                     print('Thank you! Your purchase was successfully.')
                     print('Now you have:', investor.amount_of_tesla_stocks, 'tesla stocks.')
                     print(TeslaStocks.get_total_stocks(investor))
         elif start == '3':
+            download()
             sell_what = str
             while sell_what != '5':
                 sell_what = str(input('What do you want to sell?\n'
@@ -266,24 +268,28 @@ def project():
                                       'Quit - press 5\n'))
 
                 if sell_what == '1':
+                    download()
                     how_much = int(input('How much stock do you want to sell?'))
                     GoogleStocks.sell_stocks(investor, how_much)
                     print('Thank you! Your sale was successfully.')
                     print('Now you have:', investor.amount_of_google_stocks, 'google stocks.')
                     print(GoogleStocks.get_total_stocks(investor))
                 elif sell_what == '2':
+                    download()
                     how_much = int(input('How much stock do you want to sell?'))
                     NetflixStocks.sell_stocks(investor, how_much)
                     print('Thank you! Your sale was successfully.')
                     print('Now you have:', investor.amount_of_netflix_stocks, 'netflix stocks.')
                     print(NetflixStocks.get_total_stocks(investor))
                 elif sell_what == '3':
+                    download()
                     how_much = int(input('How much stock do you want to sell?'))
                     FacebookStocks.sell_stocks(investor, how_much)
                     print('Thank you! Your sale was successfully.')
                     print('Now you have:', investor.amount_of_facebook_stocks, 'facebook stocks.')
                     print(FacebookStocks.get_total_stocks(investor))
                 elif sell_what == '4':
+                    download()
                     how_much = int(input('How much stock do you want to sell?'))
                     TeslaStocks.sell_stocks(investor, how_much)
                     print('Thank you! Your sale was successfully.')
@@ -291,52 +297,60 @@ def project():
                     print(TeslaStocks.get_total_stocks(investor))
 
         elif start == '4':
-
-                old_currency = investor.currency
-                new_currency = str(input('What currency do you prefer?\n'
-                                         'Euro or Dollar?\n'
-                                         'Dollar - enter 1\n'
-                                         'Euro - enter 2\n'
-                                         'Quit - enter 3\n'))
-                if new_currency == '1':
-                    if investor.currency == 'dollar':
-                        print('The Dollar currency was already chosen.')
-                    else:
-                        investor.currency = 'dollar'
-                        print(f'Congratulations! Your {old_currency} currency was changed on {investor.currency} currency!')
-                        GoogleStocks.price_for_one_stock = GoogleStocks.price_for_one_stock * 1.05
-                        TeslaStocks.tesla_price_for_one_stock = TeslaStocks.tesla_price_for_one_stock * 1.05
-                        FacebookStocks.facebook_price_for_one_stock = FacebookStocks.facebook_price_for_one_stock * 1.05
-                        NetflixStocks.netflix_price_for_one_stock = NetflixStocks.netflix_price_for_one_stock * 1.05
-
-                elif new_currency == '2':
-                    if investor.currency == 'euro':
-                        print('The Euro currency was already chosen.')
-                    else:
-                        investor.currency = 'euro'
-                        print(f'Congratulations! Your {old_currency} currency was changed on {investor.currency} currency!')
-                        GoogleStocks.price_for_one_stock = GoogleStocks.price_for_one_stock / 1.05
-                        TeslaStocks.tesla_price_for_one_stock = TeslaStocks.tesla_price_for_one_stock / 1.05
-                        FacebookStocks.facebook_price_for_one_stock = FacebookStocks.facebook_price_for_one_stock / 1.05
-                        NetflixStocks.netflix_price_for_one_stock = NetflixStocks.netflix_price_for_one_stock / 1.05
-
-                elif new_currency == '3':
-                    pass
+            download()
+            old_currency = investor.currency
+            new_currency = str(input('What currency do you prefer?\n'
+                                     'Euro or Dollar?\n'
+                                     'Dollar - enter 1\n'
+                                     'Euro - enter 2\n'
+                                     'Quit - enter 3\n'))
+            if new_currency == '1':
+                if investor.currency == 'dollar':
+                    download()
+                    print('The Dollar currency was already chosen.')
                 else:
-                    print('Something wrong. Please, try again.')
+                    download()
+                    investor.currency = 'dollar'
+                    print(f'Congratulations! Your {old_currency} currency was changed on {investor.currency} currency!')
+                    GoogleStocks.price_for_one_stock = GoogleStocks.price_for_one_stock * 1.05
+                    TeslaStocks.tesla_price_for_one_stock = TeslaStocks.tesla_price_for_one_stock * 1.05
+                    FacebookStocks.facebook_price_for_one_stock = FacebookStocks.facebook_price_for_one_stock * 1.05
+                    NetflixStocks.netflix_price_for_one_stock = NetflixStocks.netflix_price_for_one_stock * 1.05
+
+            elif new_currency == '2':
+                if investor.currency == 'euro':
+                    print('The Euro currency was already chosen.')
+                else:
+                    investor.currency = 'euro'
+                    print(f'Congratulations! Your {old_currency} currency was changed on {investor.currency} currency!')
+                    GoogleStocks.price_for_one_stock = GoogleStocks.price_for_one_stock / 1.05
+                    TeslaStocks.tesla_price_for_one_stock = TeslaStocks.tesla_price_for_one_stock / 1.05
+                    FacebookStocks.facebook_price_for_one_stock = FacebookStocks.facebook_price_for_one_stock / 1.05
+                    NetflixStocks.netflix_price_for_one_stock = NetflixStocks.netflix_price_for_one_stock / 1.05
+
+            elif new_currency == '3':
+                download()
+            else:
+                download()
+                print('Something wrong. Please, try again.')
 
         elif start == '5':
+            download()
             old_nickname = nickname
             new_nickname = str(input('What new nickname do you want? Please, enter: '))
             investor.nickname = new_nickname
             print(f'Congratulations! Your {old_nickname} nickname was changed on {new_nickname} nickname.')
         elif start == '6':
+            download()
             print(investor.account_balance, ' ', investor.currency, 's', sep='')
         elif start == '7':
+            download()
             how_many = int(input(f'How much {investor.currency}s do you want to add?'))
             investor.account_balance += how_many
             print(investor.account_balance, ' ', investor.currency, 's', sep='')
         elif start == '8':
+            download()
             print('Bye-Bye!')
         else:
+            download()
             print('-' * 10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.', '-' * 10)
