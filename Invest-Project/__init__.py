@@ -1,5 +1,6 @@
 import time
 from start_decorator import start_decorator, download
+from abc import ABC, abstractmethod
 
 
 @start_decorator
@@ -100,8 +101,21 @@ def project():
                 return f'You own Tesla stocks worth: {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} ' \
                        f'euros.'
 
-    class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks):
+    class AllPeople(ABC):
+
+        @staticmethod
+        def health(self, percent_of_health):
+            return percent_of_health
+
+        @abstractmethod
+        def country(self):
+            pass
+
+    class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks, AllPeople):
         currency = 'dollar'
+
+        def country(self):
+            print('USA')
 
         def __init__(self, nickname, amount_of_tesla_stocks, amount_of_netflix_stocks, amount_of_facebook_stocks,
                      amount_of_google_stocks, balance):
