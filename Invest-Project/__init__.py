@@ -1,12 +1,24 @@
-import time
 from start_decorator import start_decorator, download
 from abc import ABC, abstractmethod
 
 
 @start_decorator
 def project():
+    class StockOperations(ABC):
 
-    class GoogleStocks:
+        @abstractmethod
+        def buy_stocks(self, amount: int):
+            pass
+
+        @abstractmethod
+        def sell_stocks(self, amount: int):
+            pass
+
+        @abstractmethod
+        def get_total_stocks(self):
+            pass
+
+    class GoogleStocks(StockOperations):
         price_for_one_stock = 550
 
         def __init__(self, amount_of_google_stocks: int = 0):
@@ -29,7 +41,7 @@ def project():
                 return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
                        f'euros.'
 
-    class FacebookStocks:
+    class FacebookStocks(StockOperations):
         facebook_price_for_one_stock = 400
 
         def __init__(self, amount_of_facebook_stocks: int = 0):
@@ -53,7 +65,7 @@ def project():
                 return f'All your Facebook stocks are valued at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
                        f'euros.'
 
-    class NetflixStocks:
+    class NetflixStocks(StockOperations):
         netflix_price_for_one_stock = 330
 
         def __init__(self, amount_of_netflix_stocks: int = 0):
@@ -77,7 +89,7 @@ def project():
                 return f'All your Netlifx stocks are valued at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
                        f'euros.'
 
-    class TeslaStocks:
+    class TeslaStocks(StockOperations):
         tesla_price_for_one_stock = 270
 
         def __init__(self, amount_of_tesla_stocks: int = 0):
@@ -101,28 +113,8 @@ def project():
                 return f'You own Tesla stocks worth: {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} ' \
                        f'euros.'
 
-    class AllPeople(ABC):
-
-        @staticmethod
-        def health(self, percent_of_health):
-            return percent_of_health
-
-        @abstractmethod
-        def country(self):
-            pass
-
-        @abstractmethod
-        def bank(self):
-            pass
-
-    class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks, AllPeople):
+    class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks):
         currency = 'dollar'
-
-        def country(self):
-            print('USA')
-
-        def bank(self):
-            print('Bank of America')
 
         def __init__(self, nickname, amount_of_tesla_stocks, amount_of_netflix_stocks, amount_of_facebook_stocks,
                      amount_of_google_stocks, balance):
@@ -174,17 +166,17 @@ def project():
                 cls.price_for_one_stock = cls.price_for_one_stock / 1.05
                 return f'your {old_value} euro for 1 stock was changed on {cls.price_for_one_stock}' \
                        f' dollar for 1 stock'
+
     nickname = str(input('Please, enter your nickname: '))
     investor = Investors(nickname, 0, 0, 0, 0, 500)
     start = str
-    while start != '8':
+    while start != '7':
         start = str(input(f'What do you want {investor.nickname}?\nI want to check my actives - enter 1'
                           '\nI want to buy new stock - enter 2\nI want to sell stock - enter 3\n'
                           'Change currency - enter 4\n'
                           'Change my nickname - enter - 5\n'
                           'Check my account balance - enter 6\n'
-                          'Add money to my balance - enter 7\n'
-                          'End program - enter 8\n'))
+                          'End program - enter 7\n'))
         if start == '1':
             download()
             check_what = str
@@ -365,11 +357,6 @@ def project():
             download()
             print(investor.account_balance, ' ', investor.currency, 's', sep='')
         elif start == '7':
-            download()
-            how_many = int(input(f'How much {investor.currency}s do you want to add?'))
-            investor.account_balance += how_many
-            print(investor.account_balance, ' ', investor.currency, 's', sep='')
-        elif start == '8':
             download()
             print('Bye-Bye!')
         else:
