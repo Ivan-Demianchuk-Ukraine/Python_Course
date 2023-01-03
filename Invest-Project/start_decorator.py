@@ -1,5 +1,7 @@
+import time
+
+
 def start_decorator(function):
-    import time
     print('H', end='')
     time.sleep(0.1)
     print('e', end='')
@@ -60,3 +62,18 @@ def start_decorator(function):
     print('.')
     time.sleep(0.2)
     function()
+
+
+def download():
+    print('.', end='')
+    time.sleep(0.1)
+    print('.', end='')
+    time.sleep(0.1)
+    print('.')
+    time.sleep(0.1)
+    print('.', end='')
+    time.sleep(0.1)
+    print('.', end='')
+    time.sleep(0.1)
+    print('.')
+    time.sleep(0.2)
