@@ -13,7 +13,7 @@ def project():
     start = str
 
     class GoogleStocks:
-        google_price_for_one_stock = 550
+        price_for_one_stock = 550
 
         def __init__(self, amount_of_google_stocks: int = 0):
             self.amount_of_google_stocks = amount_of_google_stocks
@@ -29,10 +29,10 @@ def project():
 
         def get_total_stocks(self):
             if investor.currency == 'dollar':
-                return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.google_price_for_one_stock} ' \
+                return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
                        f'dollars.'
             elif investor.currency == 'euro':
-                return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.google_price_for_one_stock} ' \
+                return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
                        f'euros.'
 
     class FacebookStocks:
@@ -152,16 +152,16 @@ def project():
         def change_currency(cls, new_currency):
             if cls.currency == 'dollar' and new_currency == 'euro':
                 cls.currency = 'euro'
-                old_value = GoogleStocks.google_price_for_one_stock
-                GoogleStocks.google_price_for_one_stock = GoogleStocks.google_price_for_one_stock * 1.05
-                return f'your {old_value} dollars for 1 stock was changed on {GoogleStocks.google_price_for_one_stock}' \
+                old_value = cls.price_for_one_stock
+                cls.price_for_one_stock = cls.price_for_one_stock * 1.05
+                return f'your {old_value} dollars for 1 stock was changed on {cls.price_for_one_stock}' \
                        f' euro for 1 stock'
 
             elif cls.currency == 'euro' and new_currency == 'dollar':
                 cls.currency = 'dollar'
-                old_value = GoogleStocks.google_price_for_one_stock
-                GoogleStocks.google_price_for_one_stock = GoogleStocks.google_price_for_one_stock / 1.05
-                return f'your {old_value} euro for 1 stock was changed on {GoogleStocks.google_price_for_one_stock}' \
+                old_value = cls.price_for_one_stock
+                cls.price_for_one_stock = cls.price_for_one_stock / 1.05
+                return f'your {old_value} euro for 1 stock was changed on {cls.price_for_one_stock}' \
                        f' dollar for 1 stock'
     nickname = str(input('Please, enter your nickname: '))
     investor = Investors(nickname, 0, 0, 0, 0, 500)
@@ -173,7 +173,7 @@ def project():
                           'Change my nickname - enter - 5\n'
                           'Check my account balance - enter 6\n'
                           'Add money to my balance - enter 7\n'
-                          'End program - enter 8'))
+                          'End program - enter 8\n'))
         if start == '1':
             # print('.', end='')
             # time.sleep(0.3)
@@ -195,11 +195,11 @@ def project():
                                        'My Facebook stocks - press 3\n'
                                        'My Tesla stocks - press 4\n'
                                        'I want to check all my stocks in all companies - press 5\n'
-                                       'Quit - press 6'))
+                                       'Quit - press 6\n'))
 
                 if check_what == '1':
                     print(f'Price for 1 google stock now - '
-                          f'{GoogleStocks.google_price_for_one_stock} {investor.currency}')
+                          f'{GoogleStocks.price_for_one_stock} {investor.currency}')
                     print(GoogleStocks.get_total_stocks(investor))
                     print('You have -', investor.amount_of_google_stocks, 'stocks.')
 
@@ -222,7 +222,7 @@ def project():
                     print(investor.get_full_balance())
 
                 elif check_what == '6':
-                    pass
+                    print('...')
 
                 else:
                     print('-' * 10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.',
@@ -236,7 +236,7 @@ def project():
                                      'Netflix stocks - press 2\n'
                                      'Facebook stocks - press 3\n'
                                      'Tesla stocks - press 4\n'
-                                     'Quit - press 5'))
+                                     'Quit - press 5\n'))
 
                 if buy_what == '1':
                     how_much = int(input('How much stocks do you want ?'))
@@ -270,7 +270,7 @@ def project():
                                       'Netflix stocks - press 2\n'
                                       'Facebook stocks - press 3\n'
                                       'Tesla stocks - press 4\n'
-                                      'Quit - press 5'))
+                                      'Quit - press 5\n'))
 
                 if sell_what == '1':
                     how_much = int(input('How much stock do you want to sell?'))
@@ -304,7 +304,7 @@ def project():
                                          'Euro or Dollar?\n'
                                          'Dollar - enter 1\n'
                                          'Euro - enter 2\n'
-                                         'Quit - enter 3'))
+                                         'Quit - enter 3\n'))
                 if new_currency == '1':
                     if investor.currency == 'dollar':
                         print('The Dollar currency was already chosen.')
