@@ -31,14 +31,17 @@ def project():
 
         def sell_stocks(self, amount: int):
             self.amount_of_google_stocks = self.amount_of_google_stocks - amount
-            return f'You successfully sold {amount} google stocks. \nYour current amount of GoogleStocks = {self.amount_of_google_stocks}'
+            return f'You successfully sold {amount} google stocks. \nYour current amount of' \
+                   f' GoogleStocks = {self.amount_of_google_stocks}'
 
         def get_total_stocks(self):
             if investor.currency == 'dollar':
-                return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
+                return f'All your Google stocks are valued ' \
+                       f'at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
                        f'dollars.'
             elif investor.currency == 'euro':
-                return f'All your Google stocks are valued at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
+                return f'All your Google stocks are valued ' \
+                       f'at: {self.amount_of_google_stocks * GoogleStocks.price_for_one_stock} ' \
                        f'euros.'
 
     class FacebookStocks(StockOperations):
@@ -59,10 +62,12 @@ def project():
 
         def get_total_stocks(self):
             if investor.currency == 'dollar':
-                return f'All your Facebook stocks are valued at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
+                return f'All your Facebook stocks are valued ' \
+                       f'at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
                        f'dollars.'
             elif investor.currency == 'euro':
-                return f'All your Facebook stocks are valued at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
+                return f'All your Facebook stocks are valued ' \
+                       f'at: {self.amount_of_facebook_stocks * FacebookStocks.facebook_price_for_one_stock} ' \
                        f'euros.'
 
     class NetflixStocks(StockOperations):
@@ -83,10 +88,12 @@ def project():
 
         def get_total_stocks(self):
             if investor.currency == 'dollar':
-                return f'All your Netflix stocks are valued at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
+                return f'All your Netflix stocks are valued ' \
+                       f'at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
                        f'dollars.'
             elif investor.currency == 'euro':
-                return f'All your Netlifx stocks are valued at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
+                return f'All your Netlifx stocks are valued ' \
+                       f'at: {self.amount_of_netflix_stocks * NetflixStocks.netflix_price_for_one_stock} ' \
                        f'euros.'
 
     class TeslaStocks(StockOperations):
@@ -107,11 +114,11 @@ def project():
 
         def get_total_stocks(self):
             if investor.currency == 'dollar':
-                return f'You own Tesla stocks worth: {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} ' \
-                       f'dollars.'
+                return f'You own Tesla stocks worth:' \
+                       f' {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} dollars.'
             elif investor.currency == 'euro':
-                return f'You own Tesla stocks worth: {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} ' \
-                       f'euros.'
+                return f'You own Tesla stocks worth:' \
+                       f' {self.amount_of_tesla_stocks * TeslaStocks.tesla_price_for_one_stock} euros.'
 
     class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks):
         currency = 'dollar'
