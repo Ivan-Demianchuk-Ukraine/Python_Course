@@ -111,11 +111,18 @@ def project():
         def country(self):
             pass
 
+        @abstractmethod
+        def bank(self):
+            pass
+
     class Investors(TeslaStocks, NetflixStocks, FacebookStocks, GoogleStocks, AllPeople):
         currency = 'dollar'
 
         def country(self):
             print('USA')
+
+        def bank(self):
+            print('Bank of America')
 
         def __init__(self, nickname, amount_of_tesla_stocks, amount_of_netflix_stocks, amount_of_facebook_stocks,
                      amount_of_google_stocks, balance):
