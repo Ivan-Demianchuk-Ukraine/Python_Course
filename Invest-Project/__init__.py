@@ -1,16 +1,10 @@
-# - Сокрытие - Easy
-# - Инкапсуляция - Easy
-# У классов должно быть состояние (поля) и реализация поведения через методы. - maybe done.
-
 # - Абстрактные классы и/или интерфейсы
-
+import time
 from start_decorator import start_decorator
 
 
 @start_decorator
 def project():
-    import time
-    start = str
 
     class GoogleStocks:
         price_for_one_stock = 550
@@ -121,7 +115,6 @@ def project():
             self.__nickname = nickname
             self.__balance = balance
 
-
         def get_balance(self):
             return self.__balance
 
@@ -165,7 +158,7 @@ def project():
                        f' dollar for 1 stock'
     nickname = str(input('Please, enter your nickname: '))
     investor = Investors(nickname, 0, 0, 0, 0, 500)
-
+    start = str
     while start != '8':
         start = str(input(f'What do you want {investor.nickname}?\nI want to check my actives - enter 1'
                           '\nI want to buy new stock - enter 2\nI want to sell stock - enter 3\n'
@@ -289,7 +282,7 @@ def project():
                     FacebookStocks.sell_stocks(investor, how_much)
                     print('Thank you! Your sale was successfully.')
                     print('Now you have:', investor.amount_of_facebook_stocks, 'facebook stocks.')
-                    print(GoogleStocks.get_total_stocks(investor))
+                    print(FacebookStocks.get_total_stocks(investor))
                 elif sell_what == '4':
                     how_much = int(input('How much stock do you want to sell?'))
                     TeslaStocks.sell_stocks(investor, how_much)
@@ -311,12 +304,22 @@ def project():
                     else:
                         investor.currency = 'dollar'
                         print(f'Congratulations! Your {old_currency} currency was changed on {investor.currency} currency!')
+                        GoogleStocks.price_for_one_stock = GoogleStocks.price_for_one_stock * 1.05
+                        TeslaStocks.tesla_price_for_one_stock = TeslaStocks.tesla_price_for_one_stock * 1.05
+                        FacebookStocks.facebook_price_for_one_stock = FacebookStocks.facebook_price_for_one_stock * 1.05
+                        NetflixStocks.netflix_price_for_one_stock = NetflixStocks.netflix_price_for_one_stock * 1.05
+
                 elif new_currency == '2':
                     if investor.currency == 'euro':
                         print('The Euro currency was already chosen.')
                     else:
                         investor.currency = 'euro'
                         print(f'Congratulations! Your {old_currency} currency was changed on {investor.currency} currency!')
+                        GoogleStocks.price_for_one_stock = GoogleStocks.price_for_one_stock / 1.05
+                        TeslaStocks.tesla_price_for_one_stock = TeslaStocks.tesla_price_for_one_stock / 1.05
+                        FacebookStocks.facebook_price_for_one_stock = FacebookStocks.facebook_price_for_one_stock / 1.05
+                        NetflixStocks.netflix_price_for_one_stock = NetflixStocks.netflix_price_for_one_stock / 1.05
+
                 elif new_currency == '3':
                     pass
                 else:
@@ -333,5 +336,7 @@ def project():
             how_many = int(input(f'How much {investor.currency}s do you want to add?'))
             investor.account_balance += how_many
             print(investor.account_balance, ' ', investor.currency, 's', sep='')
+        elif start == '8':
+            print('Bye-Bye!')
         else:
             print('-' * 10, 'Ops. Seems that you entered incorrect value. Please, choose digit 1,2,3,4 or 5.', '-' * 10)
