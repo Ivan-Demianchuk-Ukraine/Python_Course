@@ -76,19 +76,26 @@ class AttributePrinterMixin:
 
 class B:
     def __init__(self):
-        self.another_bcls = 1
-        self.__fakenother_bclss = 2
-        self.__another_bclass = 3
+        self.a1nother_bcls = 1
+        self.__2fakenother_bclss = 2
+        self.__3another_bclass = 3
+
+class C:
+    def __init__(self):
+        self.s9 = 54
+        self._s10 = [54]
+        self.__s11 = (54)
 
 
-class A(AttributePrinterMixin, B):
+class A(AttributePrinterMixin, B, C):
     def __init__(self):
         B.__init__(self)
-        self.public_filed = 3
-        self._protected_field = 'q'
-        self.__private_field = [1, 2, 3]
-        self.__private__field = [1, 2, 3]
-        self._protected_fields = (1, 2, 3)
+        C.__init__(self)
+        self.p4ublic_filed = 3
+        self._p5rotected_field = 'q'
+        self.__p6rivate_field = [1, 2, 3]
+        self.__p7rivate__field = [1, 2, 3]
+        self._p8rotected_fields = (1, 2, 3)
 
 
 obj = A()
