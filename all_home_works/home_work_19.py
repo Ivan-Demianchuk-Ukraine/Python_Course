@@ -1,9 +1,6 @@
 class AttributePrinterMixin:
     def __str__(self):
 
-
-
-
         test = self.__dict__
         print(test)
 
@@ -16,12 +13,8 @@ class AttributePrinterMixin:
         result_dict = []
         count = 0
         for i, value in test.items():
-            # print('lll', i, value)
-            # print(i, value, self.__class__.__name__)
-            # add check that this attribute from right class. If not from this class, then user (super function)
 # -------------------------for A privated class-------------------------------------
             if i[0] == '_' and i[1:4] == self.__class__.__name__+'__':
-                print('11111111111111', i, value)
                 i = i.replace('_', '', 1)
                 i = i.replace(f'{self.__class__.__name__}__', '', 1)
 # -------------------------for A privated class-------------------------------------
@@ -32,36 +25,10 @@ class AttributePrinterMixin:
                     i = i.replace('_', '', 1)
                     i = i.replace(f'{_}__', '', 1)
 #-------------------------for inhereted privated class-------------------------------------
-
-            # if i[0] == '_' and i[1:4] != self.__class__.__name__+'__':
-            #     print('11111111111111', i, value)
-            #     for _ in massive_with_classes:
-            #         len_class_count = len(_)
-            #         if i[0] == '_' and i[1:len_class_count+1] == _:
-            #             i = i.replace('_', '', 1)
-            #             i = i.replace(f'{_}__', '', 1)
-# -------------------------for inhereted privated class-------------------------------------
 # -------------------------for ALL class for all protected attributes-------------------------------------
             if i[0] == '_' and i[1] != '_':
                 i = i.replace(i[0], '', 1)
 # -------------------------for ALL class for all protected attributes-------------------------------------
-
-                # s = 0
-                # for _ in inherit_three:
-                #     s += 1
-                #     name_of_class = _.__name__
-                #     len_count = len(name_of_class)
-                #     if i[0] == '_' and i[1:len_count+1] == name_of_class:
-                #         i = i.replace('_', '', 1)
-                #         i = i.replace(f'{name_of_class}__', '', 1)
-
-            elif i[0] == '_' and i[1] != '_':
-                i = i.replace(i[0], '', 1)
-                print('2222222222222', i, value)
-
-
-
-
             result_dict.append(i + ': ' + str(value))
         print(self.__class__.__name__, ':', ' {', sep='')
 
