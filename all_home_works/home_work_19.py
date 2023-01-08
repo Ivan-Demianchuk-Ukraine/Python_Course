@@ -3,10 +3,10 @@ class AttributePrinterMixin:
         all_attributes_dict = self.__dict__
         inherit_three = A.__mro__
         list_with_class_names = []
+        all_attributes_updated = {}
         for i in inherit_three:
             if i.__name__ != 'object':
                 list_with_class_names.append(i.__name__)
-        all_attributes_updated = {}
         for key, value in all_attributes_dict.items():
             self_class_length = len(self.__class__.__name__)
             if key[0] == '_' and key[1:self_class_length+3] == self.__class__.__name__+'__':
