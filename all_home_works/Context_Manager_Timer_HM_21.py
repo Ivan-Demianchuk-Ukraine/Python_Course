@@ -33,8 +33,10 @@ print(t.elapsed_time())  # ~2 seconds
 
 with Timer() as t2:
     time.sleep(1)
+    t2.reset()
+    time.sleep(1)
 print(t2.elapsed_time())  # ~1 second
-t2.reset()
+
 with t2:
     time.sleep(2)
 print(t2.elapsed_time())  # ~2 seconds
