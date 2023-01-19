@@ -42,19 +42,19 @@ class ComputersClub:
     @staticmethod
     def turn_off_mac_comps():
         for i in mac_users:
-            i.turn_on()
+            i.turn_off()
         return 'all computers with mac systems are off'
 
     @staticmethod
     def turn_off_windows_comps():
         for i in windows_users:
-            i.turn_on()
+            i.turn_off()
         return 'all computers with windows systems are off'
 
     @staticmethod
     def turn_off_linux_comps():
         for i in linux_users:
-            i.turn_on()
+            i.turn_off()
         return 'all computers with linux systems are off'
 
     def time_notify_all(self):
