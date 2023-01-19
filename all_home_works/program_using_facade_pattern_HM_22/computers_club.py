@@ -63,8 +63,8 @@ class ComputersClub:
         self.linux.notify_time()
         return f'All users received notification about the remained time.\n' \
                f'Mac-user: {self.mac.notify_time()}\n' \
-               f'Windows-user: {self.mac.notify_time()}\n' \
-               f'Linux-user: {self.mac.notify_time()}\n'
+               f'Windows-user: {self.windows.notify_time()}\n' \
+               f'Linux-user: {self.linux.notify_time()}\n'
 
 
 user_1 = Mac()
