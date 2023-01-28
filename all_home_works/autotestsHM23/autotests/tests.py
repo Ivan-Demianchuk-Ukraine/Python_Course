@@ -18,12 +18,6 @@ def test_add_valid(value, length):
     assert s.length == length
 
 
-# @pytest.mark.parametrize('value, length', [(1, 2), ('/test', 2)])
-# def test_add_invalid(value, length):
-#     s.add(value)
-#     assert s.length == length
-
-
 valid_values = [(1, 1), (2, '\ntest'), pytest.param(3, [], id='3-list'), pytest.param(4, {'key': 'value'}, id='4-dict'),
                 (5, ''), (6, True), (7, False), (8, 1), (9, 0), (10, .1), (11, -10),
                 pytest.param(12, {0, '/'}, id='12-set'), (13, open), (14, StructureWithoutList), (15, None),
