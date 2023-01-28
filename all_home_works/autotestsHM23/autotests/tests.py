@@ -1,7 +1,7 @@
 import pytest
 import sys
-from test.all_home_works.autotestsHM23.classes import StructureWithoutList
-# sys.path.append("/")
+from test.all_home_works.autotestsHM23.class_for_testing import StructureWithoutList
+sys.path.append("/")
 
 
 s = StructureWithoutList()
