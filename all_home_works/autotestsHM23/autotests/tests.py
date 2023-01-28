@@ -1,7 +1,7 @@
 import pytest
 import sys
 from test.all_home_works.autotestsHM23.classes import StructureWithoutList
-sys.path.append("/")
+# sys.path.append("/")
 
 
 s = StructureWithoutList()
@@ -34,29 +34,25 @@ def test_ordering_after_delete():
     assert s.get(8) == 0
 
 
+@pytest.mark.parametrize('index', [0, 17])
+def test_get_invalid_out_boundary_values(index):
+    with pytest.raises(IndexError) as info:
+        s.get(index)
+    assert str(info.value) == ''  # there should be some error text in the future
+
+
+@pytest.mark.parametrize('index', [0, 17])
+def test_delete_invalid_out_boundary_values(index):
+    with pytest.raises(IndexError) as info:
+        s.delete(index)
+    assert str(info.value) == ''  # there should be some error text in the future
+
+
 @pytest.mark.parametrize('index, length', [(1, 15), (1, 14), (1, 13), (1, 12), (12, 11), (1, 10), (1, 9), (1, 8),
                                            (1, 7), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2), (1, 1), (1, 0)])
 def test_delete_valid(index, length):
     s.delete(index)
     assert s.length == length
-
-
-def test_get_invalid():
-    with pytest.raises(IndexError) as info:
-        s.get(20)
-    assert str(info.value) == ''  # there should be some error text in the future
-
-
-def test_delete_invalid():
-    with pytest.raises(IndexError) as info:
-        s.delete(1)
-    assert str(info.value) == ''  # there should be some error text in the future
-
-
-def test_get_invalid_2():
-    with pytest.raises(IndexError) as info:
-        s.get(1)
-    assert str(info.value) == ''  # there should be some error text in the future
 
 
 invalid_data = ['1', None, [1], {1}, {1: 1}, StructureWithoutList, print(), 1.5]
