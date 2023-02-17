@@ -1,0 +1,23 @@
+<pages>
+    <page name='login_page'>
+        <element name='username_text_field'>
+            <locator platform="Android" locator_type="XPath">//div[3]/*[@name='username']</locator>
+            <locator platform="iOS" locator_type="ID">abc-123-gfr</locator>
+        </element>
+        <element name='password_text_field'>
+            <locator platform="Android" locator_type="XPath">//div[3]/*[@name='password']</locator>
+            <locator platform="iOS" locator_type="ID">cde-543-sdd</locator>
+        </element>
+    </page>
+    <page name='inventory_page'>
+        <element name='menu_button'>
+            <locator platform="Android" locator_type="ID">menu_android</locator>
+            <locator platform="iOS" locator_type="ID">menu_ios</locator>
+        </element>
+    </page>
+    <page name="android_specific_alert">
+        <element name="title">
+            <locator platform="Android" locator_type="ID">android_alert</locator>
+        </element>
+    </page>
+</pages>
