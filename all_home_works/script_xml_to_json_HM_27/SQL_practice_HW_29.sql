@@ -1,3 +1,8 @@
+#first solution via using UNIQUE in the parameters of creating tables.
+
+.headers on
+.mode column
+
 CREATE TABLE Persons(name STRING UNIQUE, favorite_color STRING UNIQUE, profit FLOAT UNIQUE);
 CREATE TABLE Cars(model STRING UNIQUE, color STRING UNIQUE, price FLOAT UNIQUE);
 
@@ -39,25 +44,27 @@ INSERT INTO Cars (model, color, price) VALUES ('Porsche', 'plum', 65000);
 INSERT INTO Cars (model, color, price) VALUES ('Subaru', 'lime', 9200);
 INSERT INTO Cars (model, color, price) VALUES ('Toyota', 'mauve', 14700);
 
+SELECT name, favorite_color, model, color, price, profit from Persons, Cars WHERE profit >= (SELECT price)
+AND favorite_color is (Select color) order by name ASC;
 
 
-# Со звездочкой по желанию
-# 6*. Вывести для каждого человека самый дешевый автомобиль его любимого цвета
-# , который он может себе позволить (цена автомобиля должна быть меньше или равна дохода человека).
-# Отсортировать по имени чловека в алфавитном порядке.
-# Решением должен быть файл с расширением .sql и всеми запросами
-# name  model    color  price   profit
-# ----  -------  -----  ------  -----
-# Anna  Fiat M2  red    1000.0  2000.0
-# John  Fiat M2  red    1000.0  1000.0
-# Karl  BMW M2   black  1700.0  2500.0
 
-# Результат для 6*
-# name   model    color  price   profit
-# -----  -------  -----  ------  ------
-# Anna   Fiat M2  red    1000.0  2000.0
-# James           green          500.0
-# John   Fiat M2  red    1000.0  1000.0
-# Karl   BMW M2   black  1700.0  2500.0
 
-SELECT name, favorite_color, model, color, price, profit from Persons, Cars WHERE profit >= (SELECT price) AND favorite_color is (Select color) order by name ASC;
+#second solution without using UNIQUE.
+
+.headers on
+.mode column
+
+CREATE TABLE Persons4(name STRING PRIMARY KEY, favorite_color STRING, profit FLOAT);
+CREATE TABLE Cars4(model STRING PRIMARY KEY, color STRING, price FLOAT);
+
+INSERT INTO Persons4 (name, favorite_color, profit) VALUES ('John', 'blue', 2500),
+ ('Jinny', 'blue', 3000), ('Nency', 'yellow', 13000), ('Rendy', 'yellow', 5300), ('Sara', 'grey', 5300),
+  ('Arnold', 'grey', 54000), ('Karol', 'orange', 54000);
+
+INSERT INTO Cars4 (model, color, price) VALUES ('Roadster', 'red', 19500), ('Cybertrack', 'red', 2300),
+('ModelY', 'grey', 2300), ('ModelS', 'grey', 2500), ('BMW', 'yellow', 4000), ('Mazda', 'yellow', 5150),
+('Porsh', 'orange', 5150);
+
+SELECT color, price, model from Cars4  inner join Persons4 on Persons4.profit >= Cars4.price and
+Cars4.color = Persons4.favorite_color group by name having min(price);
