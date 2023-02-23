@@ -66,5 +66,5 @@ INSERT INTO Cars4 (model, color, price) VALUES ('Roadster', 'red', 19500), ('Cyb
 ('ModelY', 'grey', 2300), ('ModelS', 'grey', 2500), ('BMW', 'yellow', 4000), ('Mazda', 'yellow', 5150),
 ('Porsh', 'orange', 5150);
 
-SELECT color, price, model from Cars4  inner join Persons4 on Persons4.profit >= Cars4.price and
-Cars4.color = Persons4.favorite_color group by name having min(price);
+SELECT name, color, price, model from Cars4 inner join Persons4 on Persons4.profit >= Cars4.price and
+Cars4.color = Persons4.favorite_color group by name having min(price) order by name ASC;
