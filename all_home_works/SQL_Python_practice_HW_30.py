@@ -17,6 +17,12 @@ class TableCreate(ConnectionToDataBase):
         self._cursor.execute('CREATE TABLE IF NOT EXISTS Persons4(name STRING PRIMARY KEY,'
                              ' favorite_color STRING, profit FLOAT);')
 
+    def execute(self, query, values=None):
+        try:
+            return list(self._cursor.execute(query))
+        finally:
+            return list(self._cursor.execute(query, values))
+
 
 class DataBase(TableCreate):
 
@@ -43,8 +49,8 @@ class DataBase(TableCreate):
             List: A list containing the details of the inserted car record.
         """
         self._cursor.execute(f"INSERT into Cars4(model, color, price) VALUES (?, ?, ?);", (model, color, price))
-        return list(self._cursor.execute("SELECT * from Cars4 where model=(?) and color=(?) and price=(?);",
-                                         (model, color, price)))
+        return self.execute("SELECT * from Cars4 where model=(?) and color=(?) and price=(?);",
+                                         (model, color, price))
 
     def update_car_price_by_model(self, model: str, price: float):
         """
@@ -58,7 +64,7 @@ class DataBase(TableCreate):
             list of lists: A list of lists where each inner list represents a row from the Cars4 table that was updated.
         """
         self._cursor.execute("UPDATE Cars4 SET price = (?) WHERE model = (?);", (price, model))
-        return list(self._cursor.execute("SELECT * from Cars4 where model=(?) and price=(?);", (model, price)))
+        return self.execute("SELECT * from Cars4 where model=(?) and price=(?);", (model, price))
 
     def get_cars_where_color(self, color):
         """
@@ -71,7 +77,7 @@ class DataBase(TableCreate):
             list of lists: A list of lists where each inner list represents a row from the Cars4 table that matches the
              specified color.
         """
-        return list(self._cursor.execute('SELECT * from Cars4 WHERE color = (?);', (color,)))
+        return self.execute('SELECT * from Cars4 WHERE color = (?);', (color,))
 
     def find_cars_where_price_range(self, price_min: float, price_max: float):
         """
@@ -85,8 +91,8 @@ class DataBase(TableCreate):
             list of lists: A list of lists where each inner list represents a row from the Cars4 table whose price falls
              within the specified range.
         """
-        return list(self._cursor.execute('SELECT * from Cars4 WHERE price > (?) and price < (?);',
-                                         (price_min, price_max)))
+        return self.execute('SELECT * from Cars4 WHERE price > (?) and price < (?);',
+                                         (price_min, price_max))
 
     def find_top_richest_cars(self, top_number: float):
         """
@@ -99,7 +105,7 @@ class DataBase(TableCreate):
             list of lists: A list of lists where each inner list represents a row from the Cars4 table for the N cars
              with the highest prices.
         """
-        return list(self._cursor.execute('SELECT * from Cars4 order by price DESC limit (?);', (top_number,)))
+        return self.execute('SELECT * from Cars4 order by price DESC limit (?);', (top_number,))
 
     def find_top_cheapest_cars(self, top_number: float):
         """
@@ -111,7 +117,7 @@ class DataBase(TableCreate):
         Returns:
             list of lists: A list of lists where each inner list represents a row from the Cars4 table for the N cars with the lowest prices.
         """
-        return list(self._cursor.execute('SELECT * from Cars4 order by price ASC limit (?);', (top_number,)))
+        return self.execute('SELECT * from Cars4 order by price ASC limit (?);', (top_number,))
 
     @staticmethod
     def delete_car_by_color(color: str):
@@ -128,18 +134,15 @@ class DataBase(TableCreate):
     def calculate_average_cost_auto_park(self):
         return f'Average cost of whole auto park: {list(self._cursor.execute("SELECT AVG(price) from Cars4;"))[0][0]}'
 
-    # def find_cars_without_price(self):
-    #     pass
-
 
 db = DataBase()
 # print(db.get_all_cars())
-# print(db.update_car_price_by_model('TestaRodsterNew2', 73000))
-# print(db.find_cars_where_price_range(2000, 10000))
+# print(db.update_car_price_by_model('TestaRodsterNew6', 71120))
+# print(db.find_cars_where_price_range(3000, 90000))
 # print(db.get_cars_where_color('red'))
-# print(db.insert_new_car('TestaRodsterNew5', 'orange-dark-light', 51100))
+# print(db.insert_new_car('TestaRodsterNew6', 'orange-dark-light', 51100))
 # print(db.delete_car_by_color('orange'))
-# print(db.find_top_richest_cars(3))
+# print(db.find_top_richest_cars(5))
 # print(db.find_top_cheapest_cars(5))
 # print(db.delete_car_by_color('orange'))
-print(db.calculate_average_cost_auto_park())
+# print(db.calculate_average_cost_auto_park())
