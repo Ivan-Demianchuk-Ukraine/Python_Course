@@ -13,10 +13,10 @@ def generate_sentence(text: str) -> str:
     return sentence
 
 
-text = "Hello, cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro..?"
-result = generate_sentence(text)
+input_text = "Hello, cocroach. And where it is? Who, can do it?! Or vice versa!? Yes, it's difficult... Claro..?"
+result = generate_sentence(input_text)
 print(result)
 
-text = "Hola..."
-result = generate_sentence(text)
+input_text = "Hola..."
+result = generate_sentence(input_text)
 print(result)
