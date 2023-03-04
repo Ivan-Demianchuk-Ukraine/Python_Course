@@ -1,27 +1,17 @@
-from datetime import timedelta
-
 import datetime
-t_year = timedelta()
-t1 = timedelta(days=3)
-t2 = timedelta(days=4)
-c = datetime.datetime(2022, 10, 17, 19, 15)
-count = 1
-print('Lecture  1: ', c)
-for i in range(16):
-    if count < 9:
-        count += 1
-        c = c + t1
-        print(f'Lecture  {count}: ', c)
-        count += 1
-        c = c + t2
-        print(f'Lecture  {count}: ', c)
-    else:
-        count += 1
-        c = c + t1
-        print(f'Lecture {count}: ', c)
-        count += 1
-        c = c + t2
-        if count == 33:
-            pass
-        else:
-            print(f'Lecture {count}: ', c)
+
+
+start_date = datetime.date(2022, 10, 17)
+class_time = datetime.time(19, 15)
+num_lectures = 32
+
+lecture_dates = []
+current_date = start_date
+while len(lecture_dates) < num_lectures:
+    if current_date.weekday() == 0 or current_date.weekday() == 3:
+        lecture_dates.append(current_date)
+    current_date += datetime.timedelta(days=1)
+
+for i, lecture_date in enumerate(lecture_dates):
+    lecture_time = datetime.datetime.combine(lecture_date, class_time)
+    print(f"Lecture {i+1:2d}: {lecture_date.strftime('%d %b %Y')} {lecture_time.strftime('%H:%M')}")
