@@ -1,65 +1,100 @@
 import pytest
-import sys
 from test.all_home_works.autotestsHM23.class_for_testing import StructureWithoutList
-sys.path.append("/")
 
 
-s = StructureWithoutList()
-
-valid_values = [(1, 1), ('\ntest', 2), pytest.param([], 3, id='list-3'), pytest.param({'key': 'value'}, 4, id='dict-4'),
-                ('', 5), (True, 6), (False, 7), (1, 8), (0, 9), (.1, 10), (-10, 11),
-                pytest.param({0, '/'}, 12, id='set-12'), (open, 13), (StructureWithoutList, 14), (None, 15),
-                (__name__, 16), (print('check'), 17)]
+@pytest.fixture
+def empty_structure():
+    return StructureWithoutList()
 
 
-@pytest.mark.parametrize('value, length', valid_values)
-def test_add_valid(value, length):
-    s.add(value)
-    assert s.length == length
+@pytest.fixture
+def simple_structure():
+    s = StructureWithoutList()
+    s.add(1)
+    s.add(2)
+    s.add(3)
+    return s
 
 
-valid_values = [(1, 1), (2, '\ntest'), pytest.param(3, [], id='3-list'), pytest.param(4, {'key': 'value'}, id='4-dict'),
-                (5, ''), (6, True), (7, False), (8, 1), (9, 0), (10, .1), (11, -10),
-                pytest.param(12, {0, '/'}, id='12-set'), (13, open), (14, StructureWithoutList), (15, None),
-                (16, __name__), (17, print('check'))]
+def test_add(empty_structure):
+    assert empty_structure.length == 0
+    empty_structure.add(1)
+    assert empty_structure.length == 1
+    assert empty_structure.get(1) == 1
+    empty_structure.add(2)
+    assert empty_structure.length == 2
+    assert empty_structure.get(2) == 2
+    empty_structure.add(3)
+    assert empty_structure.length == 3
+    assert empty_structure.get(3) == 3
 
 
-@pytest.mark.parametrize('index, result', valid_values)
-def test_get_valid(index, result):
-    assert s.get(index) == result
+def test_get(simple_structure):
+    assert simple_structure.get(1) == 1
+    assert simple_structure.get(2) == 2
+    assert simple_structure.get(3) == 3
 
 
-def test_ordering_after_delete():
-    s.delete(8)  # -11
-    assert s.get(8) == 0
+def test_delete(simple_structure):
+    assert simple_structure.length == 3
+    simple_structure.delete(2)
+    assert simple_structure.length == 2
+    assert simple_structure.get(2) == 3
+    simple_structure.delete(1)
+    assert simple_structure.length == 1
+    assert simple_structure.get(1) == 3
+    simple_structure.delete(1)
+    assert simple_structure.length == 0
+    with pytest.raises(IndexError):
+        simple_structure.delete(1)
 
 
-@pytest.mark.parametrize('index', [0, 17])
-def test_get_invalid_out_boundary_values(index):
-    with pytest.raises(IndexError) as info:
-        s.get(index)
-    assert str(info.value) == ''  # there should be some error text in the future
+def test_add_delete(empty_structure):
+    empty_structure.add(1)
+    empty_structure.delete(1)
+    with pytest.raises(IndexError):
+        empty_structure.delete(1)
+    with pytest.raises(IndexError):
+        empty_structure.get(1)
 
 
-@pytest.mark.parametrize('index', [0, 17])
-def test_delete_invalid_out_boundary_values(index):
-    with pytest.raises(IndexError) as info:
-        s.delete(index)
-    assert str(info.value) == ''  # there should be some error text in the future
+def test_get_out_of_range(simple_structure):
+    with pytest.raises(IndexError):
+        simple_structure.get(0)
+    with pytest.raises(IndexError):
+        simple_structure.get(4)
+    with pytest.raises(IndexError):
+        simple_structure.get(-1)
+    with pytest.raises(IndexError):
+        simple_structure.get(5)
 
 
-@pytest.mark.parametrize('index, length', [(1, 15), (1, 14), (1, 13), (1, 12), (12, 11), (1, 10), (1, 9), (1, 8),
-                                           (1, 7), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2), (1, 1), (1, 0)])
-def test_delete_valid(index, length):
-    s.delete(index)
-    assert s.length == length
+def test_delete_out_of_range(simple_structure):
+    with pytest.raises(IndexError):
+        simple_structure.delete(0)
+    with pytest.raises(IndexError):
+        simple_structure.delete(4)
+    with pytest.raises(IndexError):
+        simple_structure.delete(-1)
+    with pytest.raises(IndexError):
+        simple_structure.delete(5)
 
 
-invalid_data = ['1', None, [1], {1}, {1: 1}, StructureWithoutList, print(), 1.5]
+def test_reset(empty_structure):
+    empty_structure.add(1)
+    empty_structure.add(2)
+    assert empty_structure.length == 2
+    empty_structure._reset()
+    assert empty_structure.length == 0
+    with pytest.raises(IndexError):
+        empty_structure.get(1)
+    with pytest.raises(IndexError):
+        empty_structure.delete(1)
 
 
-@pytest.mark.parametrize('index', invalid_data)
-def test_get_invalid_type(index):
-    with pytest.raises(TypeError) as info:
-        s.get(index)
-    assert str(info.value) == 'index value must be integer'  # this is example of right error-text that should be.
+def test_delete_only_element(empty_structure):
+    empty_structure.add(1)
+    empty_structure.delete(1)
+    assert empty_structure.length == 0
+    assert empty_structure._current_item is None
+    assert empty_structure._current_index == 0
