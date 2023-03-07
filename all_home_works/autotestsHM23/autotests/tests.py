@@ -49,6 +49,24 @@ def test_delete(simple_structure):
         simple_structure.delete(1)
 
 
+def test_delete_only_element(empty_structure):
+    empty_structure.add(1)
+    empty_structure.delete(1)
+    assert empty_structure.length == 0
+    assert empty_structure._current_item is None
+    assert empty_structure._current_index == 0
+
+
+def test_get_empty_list(empty_structure):
+    empty_structure.add([])
+    assert empty_structure.get(1) == []
+
+
+def test_get_empty_list2(empty_structure):
+    with pytest.raises(IndexError):
+        empty_structure.get(1)
+
+
 def test_add_delete(empty_structure):
     empty_structure.add(1)
     empty_structure.delete(1)
@@ -91,10 +109,3 @@ def test_reset(empty_structure):
     with pytest.raises(IndexError):
         empty_structure.delete(1)
 
-
-def test_delete_only_element(empty_structure):
-    empty_structure.add(1)
-    empty_structure.delete(1)
-    assert empty_structure.length == 0
-    assert empty_structure._current_item is None
-    assert empty_structure._current_index == 0
