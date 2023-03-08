@@ -1,27 +1,10 @@
-from typing import Callable, Iterable
-
-
-def custom_map(func: Callable, *iterables) -> Iterable:
-    result_list = []
-    values_amount = len(iterables)
-    if hasattr(func, '__builtins__'):
-        length_min_list = []
-        for x in iterables:
-            length_min_list.append(len(x))
-        length_min = min(length_min_list)
-        for j in range(0, length_min):
-            temp_list = []
-            i = 0
-            while i < len(iterables):
-                temp_list.append(iterables[i][j])
-                i = i + 1
-            temp_list = tuple(temp_list)
-            result_list.append(func(*temp_list))
-    else:
-        if values_amount == 1 and len(iterables[0]) > 1:
-            result_list = [func(iterables[0][i]) for i in range(0, len(iterables[0]))]
-
-    return result_list
+def custom_map(function, *iterables):
+    result = []
+    min_length = min(len(iterable) for iterable in iterables)
+    for i in range(min_length):
+        args = [iterable[i] for iterable in iterables]
+        result.append(function(*args))
+    return result
 
 
 sum2 = lambda x, y: x + y
@@ -34,3 +17,13 @@ assert custom_map(sum2, [1, 2, 3, 4], (3, 4, 4, 4, 4, 4, 44)) == [4, 6, 7, 8]
 assert custom_map(sum3, [1, 1, 1], [4, 5], [0, 5, 2, 1]) == [5, 11]
 assert custom_map(min, [[1, 2, 3], [4, 5]]) == [1, 4]
 assert custom_map(max, [[1, 2, 3], [4, 5]]) == [3, 5]
+print(custom_map(min, [[757, 0, 4, 6], [8, 5, 6, 7], [2, 3, 356], [1, 88, 555], [123, 55]]))  # [0, 5, 2, 1, 55]
+sum4 = lambda x, y, z, t: x + y + z + t
+print(custom_map(sum4, [1, 2, 3, 4], [2, 3, 4, 5], [0, 0, 0, 0, 0, 0, 1, 0], [4, 5, 1, 2]))
+
+
+def sum2def(x, y):
+    return x, y
+
+
+print(custom_map(sum2def, [1, 2, 3], [3, 5, 0]))
