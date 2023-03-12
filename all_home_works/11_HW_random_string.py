@@ -1,4 +1,4 @@
-# 1. Написать функцию, которая возвращает слуайную строку заданной длины.
+# Write a function that returns a random string of a given length.
 import random
 
 
