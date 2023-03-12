@@ -97,10 +97,16 @@ class Item:
         self.next_item = next_item
 
 
-# if __name__ == "__main__":
-#     s = StructureWithoutList()
-#     s.add([])
-#     print(s.get(1))  # 1
-#
-#     s.delete(1)
-#     print(s.length)  # 0
+if __name__ == "__main__":
+    s = StructureWithoutList()
+    s.add('first')
+    s.add('second')
+    s.add('third')
+
+    print(s.get(1))  # 1
+    print(s.length)  # 2
+    s.delete(1)
+    s.delete(2)
+    s.delete(1)
+    # print(s.get(1))
+    print(s.length)  # 2

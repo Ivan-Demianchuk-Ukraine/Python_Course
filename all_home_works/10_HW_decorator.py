@@ -1,3 +1,6 @@
+# Write a call_times decorator that will take a file_name as a parameter, count the number of function calls and
+# write to the file in the format f'{func_name} has been called {count} times.\n'
+
 global_dict = {}
 
 
@@ -41,6 +44,7 @@ def call_times(filename):
 @call_times('foo.txt')
 def foo():
     pass
+
 
 @call_times('foo.txt')
 def boo():
