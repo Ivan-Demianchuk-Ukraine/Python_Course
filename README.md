@@ -6,5 +6,5 @@ This repository includes two folders with my pet works:
 
 **Invest-Project** - there is my own project where I was practiced with OOP, classes, methods, etc.
 
-p.s. **https://github.com/Ivan-Demianchuk-Ukraine/automation_project** - you can also navigate to this my repository to see the test-framework that I made via PyTest, Allure & SeleniumWebDriver.
+**https://github.com/Ivan-Demianchuk-Ukraine/automation_project** - you can also navigate to this my repository to see the test-framework that I made via PyTest, Allure & SeleniumWebDriver.
  
