@@ -1,0 +1,44 @@
+{
+    "login_page": {
+        "username_text_field": {
+            "Android": [
+                "XPath",
+                "//div[3]/*[@name='username']"
+            ],
+            "iOS": [
+                "ID",
+                "abc-123-gfr"
+            ]
+        },
+        "password_text_field": {
+            "Android": [
+                "XPath",
+                "//div[3]/*[@name='password']"
+            ],
+            "iOS": [
+                "ID",
+                "cde-543-sdd"
+            ]
+        }
+    },
+    "inventory_page": {
+        "menu_button": {
+            "Android": [
+                "ID",
+                "menu_android"
+            ],
+            "iOS": [
+                "ID",
+                "menu_ios"
+            ]
+        }
+    },
+    "android_specific_alert": {
+        "title": {
+            "Android": [
+                "ID",
+                "android_alert"
+            ]
+        }
+    }
+}
