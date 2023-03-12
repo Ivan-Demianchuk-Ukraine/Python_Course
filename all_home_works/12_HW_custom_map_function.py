@@ -27,3 +27,6 @@ def sum2def(x, y):
 
 
 print(custom_map(sum2def, [1, 2, 3], [3, 5, 0]))
+
+
+map
