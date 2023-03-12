@@ -56,14 +56,14 @@ def custom_zip(*lists, full=False, default=None) -> list:
                         timely_list.pop(0)
         return result_list
 
-# tests
+# autotests
 
 
 seq1 = [1, 2, 3, 4, 5]
 seq2 = [9, 8, 7]
 seq3 = [9, 8, 7]
 print(custom_zip(seq1, seq2, seq3, full=True, default="Q"))
-print('ww', seq1,seq2,seq3)
+print('ww', seq1, seq2, seq3)
 print(list(zip(seq1, seq2, seq3)))
 print(custom_zip(seq1, seq2, seq3))
 print(list(zip(seq1, seq2, seq3)))
